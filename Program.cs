@@ -1,33 +1,6 @@
-﻿internal class DiceRoll
+﻿using Mission2;
+internal class DiceRoll
 {
-    private static double RollTwoDie()
-    {
-        double die1, die2;
-
-        Random random = new Random();
-        die1 = random.Next(1, 7);
-        die2 = random.Next(1, 7);
-
-        return die1 + die2;
-    }
-
-    private static List<double> RollLoop(double numrolls)
-    {
-        double rolls = 0;
-        double result;
-        var rollTotals = new List<double>();
-
-
-        while (rolls < numrolls) 
-        {
-            result = RollTwoDie();
-            rollTotals.Add(result);
-            rolls++;
-        }
-
-        return rollTotals;
-    }
-
     private static Dictionary<double, double> calcPercent(List<double> rollTotals, double totRolls)
     {
         var percentDict = new Dictionary<double, double>
@@ -86,7 +59,7 @@
 
         System.Console.WriteLine("How many times should the dice be rolled?");
         numRolls = double.Parse(System.Console.ReadLine());
-        rollTotals = RollLoop(numRolls);
+        rollTotals = rollDie.rollLoop(numRolls);
         percentDict = calcPercent(rollTotals, numRolls);
 
         foreach(var(key, value) in percentDict)
